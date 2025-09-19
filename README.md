@@ -50,3 +50,57 @@ The notebook demonstrates how to:
 - Load a pre-trained TSFM
 - Apply adversarial attacks (e.g., PGD)
 - Visualize the impact on predictions
+
+
+## 🛡 Defense Methods
+
+We include two defense families:
+1. Inference-Time Smoothing (no retraining)
+2. Latent Adversarial Training (LAT) for TimesFm
+
+Both are evaluated against clean, PGD, and SimBA settings and report ND / NRMSE / CRPS.
+
+**1) Inference-Time Smoothing (no retraining)**
+
+```bash
+python ./defense/inference_smooth_timesfm.py \
+  --dataset ett1/H/short \
+  --dataset_path PATH_TO_DATA \
+  --context_length 96 \
+  --batch_size 64 \
+  --model_size 200m \
+  --kernels 1,3,5,7 \
+  --robust_eval true \
+  --attack_gt false \
+  --attack_ratio 1.0 \
+  --epsilon 0.5 \
+  --alpha 0.05 \
+  --num_iterations 50 \
+  --simba_mode random \
+  --simba_basis point \
+  --norm linf \
+  --gift_eval true \
+  --save_dir ./smooth_eval_logs 
+```
+
+**2) Latent Adversarial Training (LAT)**
+
+We perturb the latent activations during training and minimize the worst-case loss w.r.t bounded latent perturbations. We fine-tune TimesFm.
+
+```bash
+python ./defense/finetune_lat_timesfm.py \
+  --dataset ett1/H/short \
+  --dataset_path PATH_TO_DATA \
+  --context_length 96 \
+  --batch_size 64 \
+  --model_size 200m \
+  --epochs 15 \
+  --lr 1e-4 \
+  --inner_steps 10 \
+  --eta_delta 0.5 \
+  --eps 0.5 \
+  --p_norm linf \
+  --gift_eval true \
+  --save_dir ./smooth_eval_logs \
+  --max_iter 10
+```

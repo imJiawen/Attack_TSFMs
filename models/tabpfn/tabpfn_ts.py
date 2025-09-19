@@ -5,8 +5,9 @@ import numpy as np
 import pandas as pd
 import torch.nn as nn
 from autogluon.timeseries import TimeSeriesDataFrame
-from tabpfn_time_series import FeatureTransformer, DefaultFeatures
-from tabpfn_time_series import TabPFNTimeSeriesPredictor, TabPFNMode
+from models.tabpfn.tabpfn_time_series import FeatureTransformer, DefaultFeatures
+from models.tabpfn.tabpfn_time_series import TabPFNTimeSeriesPredictor, TabPFNMode
+
 
 class TabPFN(nn.Module):
     def __init__(
