@@ -1,11 +1,5 @@
 # Adversarial Robustness Evaluation for Time-Series Foundation Models
 
-This repository contains the official implementation of the paper:  
-**"Are Time-Series Foundation Models Deployment-Ready? A Systematic Study of Adversarial Robustness Across Domains"**
-
-
----
-
 ## 🔧 Installation
 
 We recommend using a dedicated Python environment:
@@ -66,8 +60,8 @@ Both are evaluated against clean, PGD, and SimBA settings and report ND / NRMSE 
 python ./defense/inference_smooth_timesfm.py \
   --dataset ett1/H/short \
   --dataset_path PATH_TO_DATA \
-  --context_length 96 \
-  --batch_size 64 \
+  --context_length CTX_LEN \
+  --batch_size BATCH_SIZE \
   --model_size 200m \
   --kernels 1,3,5,7 \
   --robust_eval true \
@@ -80,7 +74,7 @@ python ./defense/inference_smooth_timesfm.py \
   --simba_basis point \
   --norm linf \
   --gift_eval true \
-  --save_dir ./smooth_eval_logs 
+  --save_dir ./smooth_logs 
 ```
 
 **2) Latent Adversarial Training (LAT)**
@@ -91,16 +85,16 @@ We perturb the latent activations during training and minimize the worst-case lo
 python ./defense/finetune_lat_timesfm.py \
   --dataset ett1/H/short \
   --dataset_path PATH_TO_DATA \
-  --context_length 96 \
-  --batch_size 64 \
+  --context_length CTX_LEN \
+  --batch_size BATCH_SIZE \
   --model_size 200m \
-  --epochs 15 \
+  --epochs EPOCH_NUM \
   --lr 1e-4 \
-  --inner_steps 10 \
+  --inner_steps INNER_STEPS \
   --eta_delta 0.5 \
   --eps 0.5 \
   --p_norm linf \
   --gift_eval true \
-  --save_dir ./smooth_eval_logs \
-  --max_iter 10
+  --save_dir ./LAT_logs \
+  --max_iter ITER_NUM
 ```
