@@ -98,3 +98,19 @@ python ./defense/finetune_lat_timesfm.py \
   --save_dir ./LAT_logs \
   --max_iter ITER_NUM
 ```
+
+## Citation
+
+If you find this work useful, please cite our [paper](https://arxiv.org/abs/2505.19397):
+
+```bibtex
+@misc{zhang2025timeseriesfoundationmodelsdeploymentready,
+      title={Are Time-Series Foundation Models Deployment-Ready? A Systematic Study of Adversarial Robustness Across Domains},
+      author={Jiawen Zhang and Zhenwei Zhang and Shun Zheng and Xumeng Wen and Jia Li and Jiang Bian},
+      year={2025},
+      eprint={2505.19397},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2505.19397},
+}
+```
